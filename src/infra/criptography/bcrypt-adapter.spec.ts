@@ -25,4 +25,10 @@ describe('Brcypt adapter', () => {
     const hash = await sut.encrypt('any_value')
     expect(hash).toBe('hash')
   })
+  test('should throw if bcrypt throws', () => {
+    const sut = makeSut()
+    jest.spyOn(bcrypt, 'hash').mockReturnValueOnce()
+    const hash = sut.encrypt('any_value')
+    expect(new Error()).toEqual(new Error())
+  })
 })
